@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@grafbase/sdk": "^0.1.0",
     "@headlessui/react": "^1.7.15",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "20.3.2",
