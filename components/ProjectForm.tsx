@@ -4,6 +4,7 @@ import { SessionInterface } from "@/common.types"
 import { categoryFilters } from "@/constants"
 import Image from "next/image"
 import { ChangeEvent, useState } from "react"
+import Button from "./Button"
 import CustomMenu from "./CustomMenu"
 import FormField from "./FormField"
 
@@ -109,7 +110,12 @@ function ProjectForm({type, session}: Props) {
         />
 
         <div className="flexStart w-full">
-            <button>Create</button>
+            <Button
+                title="Create"
+                type='submit'
+                leftIcon={isSubmitting ? "" : '/plus.svg'}
+                isSubmitting={isSubmitting}
+            />
         </div>
     </form>
   )
