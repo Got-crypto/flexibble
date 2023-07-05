@@ -2,6 +2,7 @@
 
 import { SessionInterface } from "@/common.types"
 import { categoryFilters } from "@/constants"
+import { createNewProject, fetchToken } from "@/lib/actions"
 import Image from "next/image"
 import { ChangeEvent, useState } from "react"
 import Button from "./Button"
@@ -13,18 +14,21 @@ type Props = {
     session: SessionInterface
 }
 
-
 function ProjectForm({type, session}: Props) {
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
         setIsSubmitting(true)
 
-        // try {
-        //     if(type === 'create')
-        // } catch (error) {
-        //     clo
-        // }
+        const {token} = await fetchToken()
+
+        try {
+            if(type === 'create') {
+                await createNewProject(form, session?.user?.id, token)
+            }
+        } catch (error) {
+            throw error
+        }
 
     }
     const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
