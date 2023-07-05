@@ -15,7 +15,18 @@ type Props = {
 
 
 function ProjectForm({type, session}: Props) {
-    const handleSubmit = (e: React.FormEvent) => {}
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+
+        setIsSubmitting(true)
+
+        // try {
+        //     if(type === 'create')
+        // } catch (error) {
+        //     clo
+        // }
+
+    }
     const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
 

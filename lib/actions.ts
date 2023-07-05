@@ -1,3 +1,4 @@
+import { ProjectForm } from "@/common.types";
 import { createUserMutation, getUserQuery } from "@/graphql_";
 import { GraphQLClient } from "graphql-request";
 
@@ -36,4 +37,18 @@ export const createUser = (name: string, email: string, avatarUrl: string) => {
     }
 
     return makeGraphQLRequest(createUserMutation, variables)
+}
+
+export const uploadImage = async (imagePath:string) => {
+    try {
+        const response = await fetch(`${serveUrl}/api/upload`, {
+
+        })
+    } catch (error) {
+        
+    }
+}
+
+export const createNewProject = async (form:ProjectForm, creatorId: string, token: string) => {
+    const imageUrl = await uploadImage(form.image)
 }
