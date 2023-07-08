@@ -4,6 +4,7 @@ import { SessionInterface } from "@/common.types"
 import { categoryFilters } from "@/constants"
 import { createNewProject, fetchToken } from "@/lib/actions"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { ChangeEvent, useState } from "react"
 import Button from "./Button"
 import CustomMenu from "./CustomMenu"
@@ -15,6 +16,8 @@ type Props = {
 }
 
 function ProjectForm({type, session}: Props) {
+    const router = useRouter()
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
@@ -25,9 +28,13 @@ function ProjectForm({type, session}: Props) {
         try {
             if(type === 'create') {
                 await createNewProject(form, session?.user?.id, token)
+            
+                router.push('/')
             }
         } catch (error) {
             throw error
+        } finally {
+            setIsSubmitting(false)
         }
 
     }
@@ -121,7 +128,7 @@ function ProjectForm({type, session}: Props) {
             title="Category"
             state={form.category}
             filters={categoryFilters}
-            setState={value => handleStateChange('Category', value)}
+            setState={(value) => handleStateChange('category', value)}
         />
 
         <div className="flexStart w-full">
