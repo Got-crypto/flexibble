@@ -1,5 +1,5 @@
 import { ProjectForm } from "@/common.types";
-import { createProjectMutation, createUserMutation, getProjectByIdQuery, getUserQuery, projectsQuery } from "@/graphql_";
+import { createProjectMutation, createUserMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery } from "@/graphql_";
 import { GraphQLClient } from "graphql-request";
 
 
@@ -64,7 +64,7 @@ export const uploadImage = async (imagePath:string) => {
 }
 
 export const createNewProject = async (form:ProjectForm, creatorId: string, token: string) => {
-    const imageUrl = await uploadImage(form.image)
+    const imageUrl = await uploadImage(form?.image)
 
     if(imageUrl.url) {
         client.setHeader("Authorization", `Bearer ${token}`)
@@ -72,7 +72,7 @@ export const createNewProject = async (form:ProjectForm, creatorId: string, toke
         const variables = {
             input: {
                 ...form,
-                image: imageUrl.url,
+                image: imageUrl?.url,
                 createdBy: {
                     link: creatorId
                 }
@@ -92,4 +92,9 @@ export const fetchAllProjects = async (category?: string, endCursor?: string) =>
 export const getProjectDetails = (id: string) => {
     client.setHeader('x-api-key', apiKey)
     return makeGraphQLRequest(getProjectByIdQuery, {id})
+}
+
+export const getUserProjects = (id: string, last?: number) => {
+    client.setHeader('x-api-key', apiKey)
+    return makeGraphQLRequest(getProjectsOfUserQuery, {id, last})
 }
