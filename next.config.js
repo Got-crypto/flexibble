@@ -12,7 +12,7 @@ const nextConfig = {
         CLOUDINARY_SECRET: process.env.CLOUDINARY_SECRET
     },
     images: {
-        domains: ["lh3.googleusercontent.com"]
+        domains: ["lh3.googleusercontent.com", "res.cloudinary.com"]
     }
 }
 
