@@ -22,9 +22,6 @@ const AuthProviders = () => {
     const fetchProviders = async () => {
       const res = await getProviders();
 
-      console.log('res', res)
-      console.log(process.env.NEXT_PUBLIC_GRAFBASE_API_KEY,)
-
       setProviders(res)
     }
 
